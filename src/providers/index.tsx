@@ -92,7 +92,7 @@ interface IProviderProps {
 const Provider = ({ children }: IProviderProps) => (
   <ThemeProvider theme={theme}>
     <DAppProvider config={{}}>
-      <HelmetProvider>
+      <HelmetProvider context={{}}>
         <SnackProvider>{children}</SnackProvider>
       </HelmetProvider>
     </DAppProvider>
