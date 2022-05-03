@@ -16,7 +16,7 @@ declare module '@mui/material/styles' {
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Red Hat Display',
+    fontFamily: 'Archivo',
     h1: {
       fontSize: '36px',
       lineHeight: '44px',

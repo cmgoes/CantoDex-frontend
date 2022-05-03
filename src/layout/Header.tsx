@@ -6,16 +6,17 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
-
 import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
 import MenuItem from '@mui/material/MenuItem'
 import { Theme, useTheme } from '@mui/material/styles'
+import useMetaMask from 'hooks/useMetaMask'
 
 const Header = () => {
   const theme = useTheme<Theme>()
   const [anchorElNav, setAnchorElNav] =
     React.useState<HTMLButtonElement | null>(null)
+  const { activateBrowserWallet, account } = useMetaMask()
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -55,7 +56,15 @@ const Header = () => {
               marginLeft: 'auto'
             }}
           >
-            <Button variant="contained">Connect To Wallet</Button>
+            {account ? (
+              <Typography variant="caption" color="accent">
+                {account}
+              </Typography>
+            ) : (
+              <Button variant="contained" onClick={activateBrowserWallet}>
+                Connect To Wallet
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>
