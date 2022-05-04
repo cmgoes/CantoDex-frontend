@@ -43,7 +43,6 @@ const Header = () => {
             noWrap
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
               color: theme.palette.primary.main
             }}
           >
@@ -52,7 +51,6 @@ const Header = () => {
           <Box
             sx={{
               flexGrow: 0,
-              display: { xs: 'none', md: 'flex' },
               marginLeft: 'auto'
             }}
           >
