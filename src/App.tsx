@@ -11,6 +11,10 @@ import SupplyMarkets from 'components/SupplyMarkets'
 const App = () => {
   const { show } = useMarketDialog()
 
+  const onOpen = () => {
+    show({ token: {} as CToken })
+  }
+
   return (
     <PageLayout>
       <Grid container spacing={2}>
@@ -24,7 +28,7 @@ const App = () => {
       <Box sx={{ my: 10 }}>
         <SupplyDialog />
       </Box>
-      <Button variant="contained" onClick={show}>
+      <Button variant="contained" onClick={onOpen}>
         Supply
       </Button>
     </PageLayout>
