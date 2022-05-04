@@ -33,6 +33,7 @@ export function useAddCompData(): (account: string) => void {
   return useCallback(
     async (account) => {
       const userCompBalance =
+        // @ts-ignore: Unreachable code error
         (await Compound.comp.getCompBalance(account)) / 10 ** 18
 
       dispatch(changeStatus(true))
@@ -44,7 +45,9 @@ export function useAddCompData(): (account: string) => void {
         (await wethContract.balanceOf(getPairCompEthAddress())) /
         10 ** 18 /
         ((await compContract.balanceOf(getPairCompEthAddress())) / 10 ** 18)
+
       const compAccrued =
+        // @ts-ignore: Unreachable code error
         (await Compound.comp.getCompAccrued(account)) / 10 ** 18
       const compPrice = priceOfCompInETH * priceOfETH
 

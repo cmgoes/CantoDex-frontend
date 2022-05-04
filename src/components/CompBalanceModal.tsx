@@ -21,6 +21,7 @@ const CompBalanceModal = ({
 }) => {
   const compData = useAppSelector((state) => state.comp)
 
+  // @ts-ignore: Unreachable code error
   const compound = new Compound()
   const claim = async () => {
     try {
