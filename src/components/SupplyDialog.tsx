@@ -11,7 +11,10 @@ import { useEtherBalance, useEthers } from '@usedapp/core'
 import { formatEther } from '@ethersproject/units'
 import TabBar from './TabBar'
 import TextField from './TextField'
-import { useSupply } from 'providers/SupplyProvider'
+import {
+  MarketDialogContext,
+  useMarketDialog
+} from 'providers/MarketDialogProvider'
 
 const SupplyPane = () => {
   const [supply, setSupply] = React.useState(0)
@@ -68,11 +71,11 @@ const WithdrawPane = () => {
 }
 
 export default function SupplyDialog() {
-  const { show, hide, supply } = useSupply()
+  const { show, hide, market } = useMarketDialog()
 
   return (
     <div>
-      <Dialog open={supply.open} onClose={hide} maxWidth="xs">
+      <Dialog open={market.open} onClose={hide} maxWidth="xs">
         <DialogTitle>Basic Attention Token</DialogTitle>
         <DialogContent>
           <Stack>

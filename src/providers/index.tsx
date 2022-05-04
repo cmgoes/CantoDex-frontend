@@ -1,7 +1,7 @@
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import SnackProvider from 'providers/SnackProvider'
-import SupplyProvider from 'providers/SupplyProvider'
+import MarketDialogProvider from 'providers/MarketDialogProvider'
 import { DAppProvider } from '@usedapp/core'
 
 declare module '@mui/material/styles' {
@@ -94,9 +94,9 @@ const Provider = ({ children }: IProviderProps) => (
   <ThemeProvider theme={theme}>
     <DAppProvider config={{}}>
       <HelmetProvider context={{}}>
-        <SupplyProvider>
+        <MarketDialogProvider>
           <SnackProvider>{children}</SnackProvider>
-        </SupplyProvider>
+        </MarketDialogProvider>
       </HelmetProvider>
     </DAppProvider>
   </ThemeProvider>
