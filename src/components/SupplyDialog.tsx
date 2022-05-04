@@ -17,7 +17,6 @@ const SupplyPane = () => {
   const [supply, setSupply] = React.useState(0)
   const { account } = useEthers()
   const balance = useEtherBalance(account)
-  console.log(account, balance)
 
   const onSupply = (e: any) => {
     setSupply(e.target.value)
