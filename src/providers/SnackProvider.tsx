@@ -1,78 +1,78 @@
-import { AlertColor } from '@mui/material';
-import { useContext, createContext, useState } from 'react';
+import { AlertColor } from '@mui/material'
+import { useContext, createContext, useState } from 'react'
 
 export interface ISnack {
-  message: string;
-  open: boolean;
-  status: AlertColor;
+  message: string
+  open: boolean
+  status: AlertColor
 }
 
 interface SnackContextType {
-  snack: ISnack;
-  setSnack: (value: ISnack) => void;
+  snack: ISnack
+  setSnack: (value: ISnack) => void
 }
 
 export const SnackContext = createContext<SnackContextType | undefined>(
   undefined
-);
+)
 
 export const useSnack = () => {
-  const { snack, setSnack } = useContext(SnackContext)!;
+  const { snack, setSnack } = useContext(SnackContext)!
 
   const show = (value: Omit<ISnack, 'open'>) => {
     setSnack({
       ...value,
-      open: true,
-    });
-  };
+      open: true
+    })
+  }
 
   const hide = () => {
     setSnack({
       ...snack,
-      open: false,
-    });
-  };
+      open: false
+    })
+  }
 
   const message = {
     success: (msg: string) => {
       show({
         message: msg,
-        status: 'success',
-      });
+        status: 'success'
+      })
     },
     error: (msg: string) => {
       show({
         message: msg,
-        status: 'error',
-      });
-    },
-  };
+        status: 'error'
+      })
+    }
+  }
 
   return {
     snack,
     setSnack,
     show,
     hide,
-    message,
-  };
-};
+    message
+  }
+}
 
 interface ISnackProviderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const SnackProvider = ({ children }: ISnackProviderProps) => {
   const [snack, setSnack] = useState({
     open: false,
     message: '',
-    status: 'success' as AlertColor,
-  });
+    status: 'success' as AlertColor
+  })
 
   return (
     <SnackContext.Provider value={{ snack, setSnack }}>
       {children}
     </SnackContext.Provider>
-  );
-};
+  )
+}
 
-export default SnackProvider;
+export default SnackProvider
