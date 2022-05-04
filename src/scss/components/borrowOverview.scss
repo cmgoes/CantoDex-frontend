@@ -1,0 +1,120 @@
+@import '../abstracts/_variables.scss';
+
+.borrow-overview {
+    background-color: #070a0e;
+    padding: 20px 0;
+
+    .balance-totals {
+        position: relative;
+        max-width: 60em;
+        margin: 0 auto;
+        text-align: center;
+
+        .balance-content {
+            &-mobile-hide {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .balance-digit-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .balance-digit-value {
+            margin-top: 0.7rem;
+            font-weight: 300;
+            color: #fff;
+            font-size: 24px;
+            line-height: 1.3;
+            font-family: "Haas Grot Text R", sans-serif;
+        }
+    }
+
+    .net-apy-wrapper {
+        height: 140px;
+        width: 140px;
+        min-width: 140px;
+        position: relative;
+
+        @media (max-width: $device-sm) {
+            height: 120px;
+            width: 120px;
+        }
+
+        .net-apy-description {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            aspect-ratio: 1;
+            margin: 0.1875rem;
+            background-color: $color_dark_1;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+
+            label {
+                text-align: center;
+                color: $color_grey_1;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .headline {
+                font-size: 1.6rem;
+                font-weight: 300;
+                line-height: 14px;
+                color: #ffffff;
+                margin-top: 0.7rem;
+
+                &--loading {
+                    height: 1.75rem;
+                    width: 4rem;
+                    transform: translateX(0);
+                }
+            }
+
+            &.active {
+                color: red;
+                background-color: $color_dark_mostly_opaque;
+
+                label {
+                    color: #ffffff;
+                }
+
+                .headline {
+                    color: $color_light_2;
+                    font-size: 12px;
+                    text-align: center;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .limit-bar {
+        display: flex;
+        align-items: center;
+        margin-top: 3.25rem;
+
+        .progress-bar-wrapper {
+            flex: 1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            color: $color_grey_1;
+        }
+
+        label:last-of-type {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+    }
+}

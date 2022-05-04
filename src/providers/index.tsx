@@ -1,9 +1,11 @@
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { Provider } from 'react-redux'
 import SnackProvider from 'providers/SnackProvider'
 import MarketDialogProvider from 'providers/MarketDialogProvider'
 import { Mainnet, DAppProvider, Config } from '@usedapp/core'
 import { getDefaultProvider } from 'ethers'
+import store from 'state'
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -98,16 +100,18 @@ const config: Config = {
   }
 }
 
-const Provider = ({ children }: IProviderProps) => (
-  <ThemeProvider theme={theme}>
-    <DAppProvider config={config}>
-      <HelmetProvider context={{}}>
-        <MarketDialogProvider>
-          <SnackProvider>{children}</SnackProvider>
-        </MarketDialogProvider>
-      </HelmetProvider>
-    </DAppProvider>
-  </ThemeProvider>
+const AllProvider = ({ children }: IProviderProps) => (
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <DAppProvider config={config}>
+        <HelmetProvider context={{}}>
+          <MarketDialogProvider>
+            <SnackProvider>{children}</SnackProvider>
+          </MarketDialogProvider>
+        </HelmetProvider>
+      </DAppProvider>
+    </ThemeProvider>
+  </Provider>
 )
 
-export default Provider
+export default AllProvider
