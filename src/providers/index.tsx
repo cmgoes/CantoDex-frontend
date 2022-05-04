@@ -2,7 +2,8 @@ import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import SnackProvider from 'providers/SnackProvider'
 import MarketDialogProvider from 'providers/MarketDialogProvider'
-import { DAppProvider } from '@usedapp/core'
+import { Mainnet, DAppProvider, Config } from '@usedapp/core'
+import { getDefaultProvider } from 'ethers'
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -90,9 +91,16 @@ interface IProviderProps {
   children: React.ReactNode
 }
 
+const config: Config = {
+  readOnlyChainId: Mainnet.chainId,
+  readOnlyUrls: {
+    [Mainnet.chainId]: getDefaultProvider('mainnet')
+  }
+}
+
 const Provider = ({ children }: IProviderProps) => (
   <ThemeProvider theme={theme}>
-    <DAppProvider config={{}}>
+    <DAppProvider config={config}>
       <HelmetProvider context={{}}>
         <MarketDialogProvider>
           <SnackProvider>{children}</SnackProvider>

@@ -10,10 +10,16 @@ import useMarkets from 'hooks/useMarkets'
 import { formatPercent } from 'utils'
 import { Stack, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
+import { useMarketDialog } from 'providers/MarketDialogProvider'
 
 const logoUrl = 'https://app.compound.finance/compound-components/assets'
 const SupplyMarkets = () => {
   const { cTokens } = useMarkets()
+  const { show } = useMarketDialog()
+
+  const onOpen = (token: CToken) => {
+    show({ token, key: 'supply' })
+  }
 
   return (
     <Box>
@@ -34,6 +40,7 @@ const SupplyMarkets = () => {
                 hover
                 key={token.token_address}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                onClick={() => onOpen(token)}
               >
                 <TableCell component="th" scope="row">
                   <Stack spacing={2} direction="row">
@@ -46,7 +53,7 @@ const SupplyMarkets = () => {
                   </Stack>
                 </TableCell>
                 <TableCell align="right">
-                  {formatPercent(token.borrow_rate.value)}
+                  {formatPercent(token.supply_rate.value)}
                 </TableCell>
                 <TableCell align="right">0 {token.symbol.slice(1)}</TableCell>
                 <TableCell align="right">

@@ -3,6 +3,7 @@ import { useContext, createContext, useState } from 'react'
 
 export interface IMarketDialog {
   open: boolean
+  key: string
   token: CToken
 }
 
@@ -47,6 +48,7 @@ interface IMarketDialogProviderProps {
 const MarketProvider = ({ children }: IMarketDialogProviderProps) => {
   const [market, setMarket] = useState({
     open: false,
+    key: '',
     token: {} as CToken
   })
 
