@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -8,24 +7,72 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Stack from '@mui/material/Stack'
+import { useEtherBalance, useEthers } from '@usedapp/core'
+import { formatEther } from '@ethersproject/units'
+import TabBar from './TabBar'
+import TextField from './TextField'
+import { useSupply } from 'providers/SupplyProvider'
 
-export default function SupplyDialog() {
-  const [open, setOpen] = React.useState(false)
+const SupplyPane = () => {
+  const [supply, setSupply] = React.useState(0)
+  const { account } = useEthers()
+  const balance = useEtherBalance(account)
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
+  const onSupply = (e: any) => {
+    setSupply(e.target.value)
   }
 
   return (
+    <Stack>
+      <Typography variant="body2">Supply Rates</Typography>
+      <Typography variant="body2" sx={{ width: '100%' }}>
+        Supply APY 2.64%
+      </Typography>
+      <Typography variant="body2" sx={{ width: '100%' }}>
+        Distribution APY 4.72%
+      </Typography>
+      <Typography variant="body2">Borrow Limit</Typography>
+      <Typography variant="body2" sx={{ width: '100%' }}>
+        Borrow Limit 4.72%
+      </Typography>
+      <Typography variant="body2" sx={{ width: '100%' }}>
+        Borrow Limit Used 4.72%
+      </Typography>
+      <TextField
+        value={supply}
+        onChange={onSupply}
+        name="supply"
+        type="number"
+      />
+      <Button variant="contained">Enable</Button>
+
+      <Typography variant="caption">
+        Balance: {formatEther(balance || 0)}
+      </Typography>
+    </Stack>
+  )
+}
+
+const WithdrawPane = () => {
+  return (
+    <Stack>
+      <Typography variant="body2" sx={{ width: '100%' }}>
+        Withdraw APY 2.64%
+      </Typography>
+      <Typography variant="body2" sx={{ width: '100%' }}>
+        Distribution APY 4.72%
+      </Typography>
+      <Button variant="contained">Enable</Button>
+    </Stack>
+  )
+}
+
+export default function SupplyDialog() {
+  const { show, hide, supply } = useSupply()
+
+  return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        Supply
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth="xs">
+      <Dialog open={supply.open} onClose={hide} maxWidth="xs">
         <DialogTitle>Basic Attention Token</DialogTitle>
         <DialogContent>
           <Stack>
@@ -33,13 +80,18 @@ export default function SupplyDialog() {
               To Supply or Repay Aave Token to the Compound Protocol, you need
               to enable it first.
             </Typography>
-            <Typography variant="body2" sx={{ width: '100%' }}>
-              Supply APY 2.64%
-            </Typography>
-            <Typography variant="body2" sx={{ width: '100%' }}>
-              Distribution APY 4.72%
-            </Typography>
-            <Button variant="contained">Enable</Button>
+            <TabBar
+              tabs={[
+                {
+                  label: 'Supply',
+                  component: <SupplyPane />
+                },
+                {
+                  label: 'Withdraw',
+                  component: <WithdrawPane />
+                }
+              ]}
+            />
           </Stack>
         </DialogContent>
       </Dialog>
