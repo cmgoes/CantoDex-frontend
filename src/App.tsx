@@ -3,13 +3,17 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import SupplyDialog from 'components/SupplyDialog'
-import { useSupply } from 'providers/SupplyProvider'
+import { useMarketDialog } from 'providers/MarketDialogProvider'
 import 'styles/global.css'
 import BorrowMarkets from 'components/BorrowMarkets'
 import SupplyMarkets from 'components/SupplyMarkets'
 
 const App = () => {
-  const { show } = useSupply()
+  const { show } = useMarketDialog()
+
+  const onOpen = () => {
+    show({ token: {} as CToken })
+  }
 
   return (
     <PageLayout>
@@ -23,10 +27,10 @@ const App = () => {
       </Grid>
       <Box sx={{ my: 10 }}>
         <SupplyDialog />
-        <Button variant="contained" onClick={show}>
-          Supply
-        </Button>
       </Box>
+      <Button variant="contained" onClick={onOpen}>
+        Supply
+      </Button>
     </PageLayout>
   )
 }
