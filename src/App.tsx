@@ -9,7 +9,7 @@ import SupplyMarkets from 'components/SupplyMarkets'
 const App = () => {
   return (
     <PageLayout>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ mt: 5 }}>
         <Grid item xs={6}>
           <SupplyMarkets />
         </Grid>

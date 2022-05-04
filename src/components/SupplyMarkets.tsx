@@ -18,7 +18,7 @@ const SupplyMarkets = () => {
   const { show } = useMarketDialog()
 
   const onOpen = (token: CToken) => {
-    show({ token })
+    show({ token, key: 'supply' })
   }
 
   return (
@@ -53,7 +53,7 @@ const SupplyMarkets = () => {
                   </Stack>
                 </TableCell>
                 <TableCell align="right">
-                  {formatPercent(token.borrow_rate.value)}
+                  {formatPercent(token.supply_rate.value)}
                 </TableCell>
                 <TableCell align="right">0 {token.symbol.slice(1)}</TableCell>
                 <TableCell align="right">
